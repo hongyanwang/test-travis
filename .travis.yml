@@ -2,10 +2,10 @@ services:
   - docker
 
 before_install:
-  - docker pull teaclave/teaclave-build-ubuntu-1804-sgx-2.9.1
+  - docker pull rust:1.44.0
 
 script:
-  - docker run -it -v $PWD:/teaclave -w /teaclave teaclave/teaclave-build-ubuntu-1804-sgx-2.9.1 /bin/sh -c "cargo build; cargo test"
+  - docker run -it -v $PWD:/teaclave -w /teaclave rust:1.44.0 /bin/sh -c "cargo build; cargo test"
 
 after_success:
   - coveralls
