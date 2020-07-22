@@ -6,11 +6,10 @@ before_install:
 
 before_script:
   - sudo apt update
-  - sudo apt install coveralls
   - sudo apt install npm
 
 script:
-  - npm run coveralls
+  - npm run cover
   - docker run -it -v $PWD:/teaclave -w /teaclave rust:1.44.0 /bin/sh -c "cargo test"
 
 after_success:
