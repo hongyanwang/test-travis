@@ -9,7 +9,7 @@ before_script:
   - sudo apt install ruby-coveralls
 
 script:
-  - docker run -it --name travis -v $PWD:/teaclave -w /teaclave rust:1.44.0 /bin/sh -c "cargo build; cargo test"
+  - docker run -it --name travis -v $PWD:/teaclave -w /teaclave rust:1.44.0 /bin/sh -c "cargo build; coverage run test"
 
 after_success:
   - docker cp travis:/teaclave/.coverage ./
