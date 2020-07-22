@@ -5,7 +5,7 @@ before_install:
   - docker pull rust:1.44.0
 
 before_script:
-  - apt install ruby-coveralls
+  - sudo apt install ruby-coveralls
 
 script:
   - docker run -it -v $PWD:/teaclave -w /teaclave rust:1.44.0 /bin/sh -c "cargo build; cargo test"
