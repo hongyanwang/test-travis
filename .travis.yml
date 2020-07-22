@@ -9,11 +9,11 @@ before_script:
   - sudo apt install ruby-coveralls
 
 script:
-  - docker run -it --name test-travis -v $PWD:/teaclave -w /teaclave rust:1.44.0 /bin/sh -c "cargo build; cargo test"
+  - docker run --name travis -v $PWD:/teaclave -w /teaclave rust:1.44.0 -it /bin/sh -c "cargo build; cargo test"
 
 after_success:
-  - docker cp test-travis:/teaclave/.coverage ./
-  - coverage combine
+  - docker cp travis:/teaclave/.coverage ./
+  - sed -i "s@\"/test-travis/@\"${PWD}/@g" .coverage
   - coveralls
 
 cache:
