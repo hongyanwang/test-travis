@@ -1,19 +1,14 @@
-language: rust
+services:
+  - docker
 
-rust:
-  - nightly
-
-matrix:
-  include:
-    - os: linux
-      dist: xenial
+before_install:
+  - docker pull teaclave/teaclave-build-ubuntu-1804-sgx-2.9.1
 
 script:
-  - cargo build --verbose --all
-  - cargo test --verbose --all
+  - docker run -it -v $PWD:/teaclave -w /teaclave teaclave/teaclave-build-ubuntu-1804-sgx-2.9.1 /bin/sh -c "cargo build; cargo test"
 
 after_success:
-  - codecov
+  - coveralls
 
 cache:
   directories:
