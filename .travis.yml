@@ -7,15 +7,17 @@ before_install:
 before_script:
   - sudo apt update
   - sudo apt install npm
+  - sudo npm install coveralls --save-dev
+
+cache:
+  directories: node_modules
 
 script:
-  - npm run cover
+  - npm run coveralls
   - docker run -it -v $PWD:/teaclave -w /teaclave rust:1.44.0 /bin/sh -c "cargo test"
 
 after_success:
 #  - bash -c "bash <(curl -s https://codecov.io/bash) -f ./cov.info"
   - cat ./cov.info | ./node_modules/coveralls/bin/coveralls.js
 
-cache:
-  directories:
-    - .cache
+
