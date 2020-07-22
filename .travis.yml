@@ -6,13 +6,12 @@ before_install:
 
 before_script:
   - sudo apt update
-  - sudo apt install ruby-coveralls
 
 script:
-  - docker run -it -v $PWD:/teaclave -w /teaclave rust:1.44.0 /bin/sh -c "cargo build; cargo test"
+  - docker run -it -v $PWD:/teaclave -w /teaclave rust:1.44.0 /bin/sh -c "cargo test"
 
 after_success:
-  - coveralls --data_file=./cov.info
+  - bash -c "bash <(curl -s https://codecov.io/bash) -f ./cov.info"
 
 cache:
   directories:
