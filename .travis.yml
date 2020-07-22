@@ -6,7 +6,7 @@ before_install:
 
 before_script:
   - sudo apt update
-  - atp install coveralls
+  - apt install coveralls
   - apt install npm
 
 script:
