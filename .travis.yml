@@ -12,8 +12,8 @@ script:
   - docker run -it -v $PWD:/teaclave -w /teaclave rust:1.44.0 /bin/sh -c "cargo build; cargo test"
 
 after_success:
-  - coveralls report
-  - coveralls push
+  - sed -i "s@\"/teaclave/@\"${PWD}/@g" .coverage
+  - coveralls
 
 cache:
   directories:
