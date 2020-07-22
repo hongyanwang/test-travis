@@ -13,7 +13,7 @@ script:
   - cargo test --verbose --all
 
 after_success:
-  - bash <(curl -s https://codecov.io/bash)
+  - codecov
 
 cache:
   directories:
