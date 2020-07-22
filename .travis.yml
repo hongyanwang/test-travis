@@ -13,7 +13,7 @@ cache:
   directories: node_modules
 
 script:
-  - npm run coveralls
+#  - npm run coveralls
   - docker run -it -v $PWD:/teaclave -w /teaclave rust:1.44.0 /bin/sh -c "cargo test"
 
 after_success:
