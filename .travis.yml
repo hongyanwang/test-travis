@@ -7,6 +7,5 @@ before_install:
 script:
   - docker run -it -v $PWD:/teaclave -w /teaclave rust:1.44.0 /bin/sh -c "cargo test"
 
-after_success:
+after_script:
   - bash -c "bash <(curl -s https://codecov.io/bash) -f ./cov.info"
-
